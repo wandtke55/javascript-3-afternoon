@@ -30,7 +30,19 @@
 */
 
 //Code Here
-
+class Employee {
+  constructor(first_name, last_name, email, age) {
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.email = email;
+    this.age = age
+  }
+  makeWidget() {
+    return `${this.first_name} ${this.last_name} Widget`;
+  }
+}
+var sam = new Employee('Sam', 'Smith', 'samsmith@email.com', 24)
+var widget = sam.makeWidget();
 
 
 ////////// PROBLEM 2 //////////
@@ -50,7 +62,28 @@
 */
 
 //Code Here
+class Manager {
+  constructor(first_name, last_name, email, age, ) {
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.email = email;
+    this.age = age;
+    this.reports = [];
+  }
+  makeWidget() {
+    return `${this.first_name} ${this.last_name} Widget`;
+  }
 
+  hire(employee) {
+    this.reports.push(employee)
+  }
+  fire(i) {
+    this.reports.splice(i, 1)
+  }
+}
+var brett = new Manager('brett', 'johnson', 'bjohnson@email.com', 45)
+var brettHire = brett.hire('sam')
+var brettFire = brett.fire('ben')
 
 
 ////////// PROBLEM 3 //////////
@@ -76,6 +109,46 @@
 */
 
 //Code Here
+class ProgressiveManager {
+  constructor(first_name, last_name, email, age) {
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.email = email;
+    this.age = age;
+    this.reports = [];
+    this.title = "Not a manager";
+    this.bonus = 0
+  }
+
+  makeWidget() {
+    return `${this.first_name} ${this.last_name} Widget`
+  }
+
+  hire(employee) {
+    this.reports.push(employee);
+    if (this.reports.length >= 1 && this.reports.length <= 3) {
+      this.title = "Barely Manager"
+    }
+    else if (this.reports.length >= 4 && this.reports.length <= 10) {
+      this.title = "Mostly Manager"
+    }
+    else if (this.reports.length >= 11 && this.reports.length <= 50) {
+      this.title = "Manager"
+    }
+    else if (this.reports.length >= 51 && this.reports.length <= 100) {
+      this.title = "Manager Plus"
+    }
+    else if (this.reports.length >= 101) {
+      this.title = "Bestest Manager"
+    }
+  }
+
+  fire(index) {
+    this.reports.splice(index, 1)
+    this.bonus += 100
+  }
+}
+
 
 
 
@@ -103,5 +176,23 @@
 */
 
 //Code Here
-
-
+class Machine {
+  constructor() {
+    this.widgets_made_count = 0;
+    this.wear_and_tear_count = 0;
+    this.needs_reboot = false;
+  }
+  makeWidgets(number) {
+    this.widgets_made_count += number;
+    this.wear_and_tear_count = Math.floor(this.widgets_made_count / 50)
+  }
+  fixMachine() {
+    this.needs_reboot = true;
+  }
+  reboot() {
+    return () => {
+      this.wear_and_tear_count -= 10;
+      this.needs_reboot = false;
+    }
+  }
+}
